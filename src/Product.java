@@ -122,20 +122,20 @@ public class Product {
     }
 
     public String toRAF(){
-        String RAF = formatID() + ", " + formatName() + ", " + formatDescription();
+        String RAF = formatID() + ", " + formatName() + ", " + formatDescription() + ", " + getPrice();
         return RAF;
     }
 
     public String formatID(){
-        return String.format(ID,6);
+        return String.format("%06d",Integer.parseInt(ID));
     }
 
     public String formatName(){
-        return String.format(Name,35);
+        return String.format("%35s",Name);
     }
 
     public String formatDescription(){
-        return String.format(Description,75);
+        return String.format("%75s",Description);
     }
 
 
