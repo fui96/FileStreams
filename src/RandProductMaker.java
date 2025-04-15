@@ -97,6 +97,17 @@ public class RandProductMaker extends JFrame {
     }
     //methods
 
+    public void writeFixedLenString(String s,int length, RandomAccessFile raf) throws IOException {
+        raf.seek(raf.length());
+        StringBuilder sb = new StringBuilder(s);
+        sb.setLength(length);
+        for (int i = 0; i < length; i++) {
+            raf.writeChar(sb.charAt(i));
+        }
+    }
+
+
+
     public void newProduct() throws IOException {
         //Create Product
         Product Prod = new Product((String.valueOf(i)),TFName.getText(),TFDescription.getText(),(Double.parseDouble(TFPrice.getText())));
@@ -107,15 +118,17 @@ public class RandProductMaker extends JFrame {
         TFDescription.setText("");
         TFPrice.setText("");
         //write record
-        raf.seek(raf.length());
-        raf.writeChars(Prod.toRAF());
+        writeFixedLenString(Prod.getID(),6,raf);
+        writeFixedLenString(Prod.getName(),35,raf);
+        writeFixedLenString(Prod.getDescription(),75,raf);
         raf.writeDouble(Prod.getPrice());
-        raf.close();
         //append record count and ID counter
         TFCounter.setText("" + i);
         i++;
 
     }
+
+
 
 
 

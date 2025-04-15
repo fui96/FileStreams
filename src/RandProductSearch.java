@@ -95,13 +95,18 @@ public class RandProductSearch extends JFrame {
         ResultsPanel = new JPanel();
         ResultsPanel.setLayout(new BorderLayout());
 
-        results = new JTextArea();
+        results = new JTextArea(20,20);
         results.setEditable(false);
         results.setLineWrap(true);
         results.setWrapStyleWord(true);
         resultsScroll = new JScrollPane(results);
 
         ResultsPanel.add(resultsScroll,BorderLayout.CENTER);
+        try {
+            compileStream();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
 
     }
@@ -118,6 +123,7 @@ public class RandProductSearch extends JFrame {
 
     //Methods
     public void compileStream() throws IOException {
+        products.clear();
         raf = new RandomAccessFile("src/ProdRandAccess.dat","r");
         long numProducts = raf.length() / 240;
         for(int i = 0; i < numProducts; i++){
@@ -129,8 +135,10 @@ public class RandProductSearch extends JFrame {
             double price = raf.readDouble();
 
             products.add(new Product(ID, Name, Description, price));
-        }
 
+
+        }
+        raf.close();
     }
 
     public String search(String SearchFor){
@@ -139,6 +147,7 @@ public class RandProductSearch extends JFrame {
                 .filter(p ->p.getName().toLowerCase().contains(SearchFor.toLowerCase()))
                 .forEach(p -> {
                     sb.append(p.exportString());
+                    System.out.println(p.exportString());
                 });
         System.out.println(sb.toString());
         return sb.toString();

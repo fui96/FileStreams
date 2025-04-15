@@ -139,7 +139,7 @@ public class Product {
     }
 
     public String exportString(){
-        return ID + ", " + Name + ", " + Description + ", " + Double.toString(Price);
+        return ID + ", " + Name + ", " + Description + ", " + Double.toString(Price) + "\n";
     }
 
 }
