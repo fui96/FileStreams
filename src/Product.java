@@ -122,7 +122,7 @@ public class Product {
     }
 
     public String toRAF(){
-        String RAF = formatID() + ", " + formatName() + ", " + formatDescription() + ", " + getPrice();
+        String RAF = formatID() + ", " + formatName() + ", " + formatDescription();
         return RAF;
     }
 

@@ -108,15 +108,12 @@ public class RandProductMaker extends JFrame {
         TFPrice.setText("");
         //write record
         raf.seek(raf.length());
-        raf.writeBytes(Prod.toRAF());
+        raf.writeChars(Prod.toRAF());
+        raf.writeDouble(Prod.getPrice());
         raf.close();
         //append record count and ID counter
         TFCounter.setText("" + i);
         i++;
-
-
-
-
 
     }
 
