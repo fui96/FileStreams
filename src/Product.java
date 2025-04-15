@@ -138,6 +138,8 @@ public class Product {
         return String.format("%75s",Description);
     }
 
-
+    public String exportString(){
+        return ID + ", " + Name + ", " + Description + ", " + Double.toString(Price);
+    }
 
 }
